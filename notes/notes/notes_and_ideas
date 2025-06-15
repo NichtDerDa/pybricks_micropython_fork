@@ -1,0 +1,25 @@
+in
+pybricks/robotics/pb_type_drivebase.c
+new await_or_wait()
+@param pb_type_Drivebase_obj self
+@param type_num time_out
+
+
+PB_PARSE_ARGS_METHOD(n_args, pos_args, kw_args,
+        pb_type_DriveBase_obj_t, self,
+        PB_ARG_REQUIRED(distance),
+        PB_ARG_DEFAULT_OBJ(then, pb_Stop_HOLD_obj),
+        PB_ARG_DEFAULT_TRUE(wait));
+-> parses "n_args" from given parameters. creates variables called x_in where x is the name in the brackets (eg wait_in from wait)
+-> new type just for nums creating???
+  -> in pybricks/parameters/pb_module_parameters.c
+
+in
+pybricks/tools/pb_type_awaitable
+new func that accepts timeout in ms and db (Drivebase)
+while loop already included. 
+Method for motor angle: idk, maybe you need to directly address them via the given db
+Method for stop: db.pb_type_Drivebase_stop(obj self_in) or db.pb_type_Drivebase_brake(obj self_in) 
+-> Maybe give self_in into await_or_wait() and then pb_type_await_or_wait()???
+
+Then in new await_or_wait() call the new pb_type_await_or_wait() written earlyer
